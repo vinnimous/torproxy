@@ -1,8 +1,8 @@
 # setting alpine as a base for speed and size
 FROM alpine:latest
 
-# update the package repository and install Tor
-RUN apk update && apk add tor
+# update the package repository and install Tor and Privoxy
+RUN apk update && apk add tor privoxy
 
 # Copy over the torrc created above and set the owner to `tor`
 COPY torrc /etc/tor/torrc
