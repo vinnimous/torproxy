@@ -29,5 +29,8 @@ RUN chown -R anon start.sh
 # Set `tor` as the default user during the container runtime
 USER anon
 
+# Set entrypoint
+ENTRYPOINT [ "/bin/sh", "-c" ]
+
 # Starts everything
 CMD ["start.sh"]
