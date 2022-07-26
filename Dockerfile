@@ -14,23 +14,20 @@ COPY services/tor/run.sh /etc/tor/run.sh
 COPY services/privoxy/config /etc/privoxy/config
 COPY services/privoxy/run.sh /etc/privoxy/run.sh
 
+# Copy over the start up script
+COPY start.sh /
+
 # Create user group
 RUN addgroup -S anon \
 && adduser -S anon -G anon \
 && chown anon:anon /etc/tor \
 && chown -R anon:anon /etc/tor/* \
 && chown anon:anon /etc/privoxy \
-&& chown -R anon:anon /etc/privoxy/*
-
-# Copy over the start up script
-COPY start.sh /
-RUN chown -R anon start.sh
+&& chown -R anon:anon /etc/privoxy/* \
+&& chown -R anon:anon /start.sh
 
 # Set `tor` as the default user during the container runtime
 USER anon
 
-# Set entrypoint
-ENTRYPOINT [ "/bin/sh", "-c" ]
-
 # Starts everything
-CMD ["sh", "start.sh"]
+CMD ["/start.sh"]
