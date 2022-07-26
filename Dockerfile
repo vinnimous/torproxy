@@ -32,5 +32,8 @@ RUN chmod +x /start.sh
 # Set `tor` as the default user during the container runtime
 USER anon
 
+# Starting exposure of ports
+EXPOSE 8118 9050
+
 # Starts everything
 CMD ["/start.sh"]
