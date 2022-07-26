@@ -1,9 +1,7 @@
-name: Docker Image CI
+name: Docker Image Build Only
 
 on:
   push:
-    branches: [ "feature/*" ]
-  pull_request:
     branches: [ "feature/*" ]
 
 jobs:
