@@ -9,12 +9,18 @@ RUN apk update --no-cache && apk add tor privoxy
 # Copy over the torrc created above and set the owner to `tor`
 COPY services/tor/config /etc/tor/torrc
 COPY services/tor/run.sh /etc/tor/run.sh
-RUN chown -R tor /etc/tor/*
 
 # Copy over the privoxy_configurations
 COPY services/privoxy/config /etc/privoxy/config
 COPY services/privoxy/run.sh /etc/privoxy/run.sh
-RUN chown -R tor /etc/privoxy/*
+
+# Create user group
+RUN addgroup -S tor \
+&& adduser -S tor -G tor \
+&& chown tor:tor /etc/tor \
+&& chown -R tor:tor /etc/tor/* \
+&& chown tor:tor /etc/privoxy \
+&& chown -R tor:tor /etc/privoxy/*
 
 # Copy over the start up script
 COPY start.sh /
