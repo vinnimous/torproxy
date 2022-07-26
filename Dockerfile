@@ -6,9 +6,6 @@ LABEL maintainer="vinnimous"
 # Update the package repository and install Tor and privoxy
 RUN apk update --no-cache && apk add tor privoxy
 
-# Expose required ports
-EXPOSE 8118 9050
-
 # Copy over the torrc created above and set the owner to `tor`
 COPY services/tor/config /etc/tor/torrc
 COPY services/tor/run.sh /etc/tor/run.sh
@@ -26,9 +23,5 @@ RUN chown -R tor start.sh
 # Set `tor` as the default user during the container runtime
 USER tor
 
-# Set `tor` as the entrypoint for the image
-# ENTRYPOINT ["tor"]
-
-# Set the default container command
-# This can be overridden later when running a container
+# Starts everything
 CMD ["start.sh"]
