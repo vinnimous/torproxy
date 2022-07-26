@@ -1,6 +1,4 @@
 # torproxy
-This is as simple of a tor proxy for use within docker that I could come up with with a very quick boot time
+This is as simple of a tor proxy for use within docker that I could come up with with a very quick boot time.  It was created to be as small, versitile, and secure.
 
-Basis for this project is based on the work by Nabarun located at https://dev.to/nabarun/running-tor-proxy-with-docker-56n9
-
-Requires exposure of port 9050 for socks
+Requires exposure of port 9050 for socks and 8118 for privoxy
