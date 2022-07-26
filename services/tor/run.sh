@@ -1,2 +1,2 @@
 #!/bin/sh
-tor -f ./torrc
+tor -f /etc/tor/torr &>/dev/null &

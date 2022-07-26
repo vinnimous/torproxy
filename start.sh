@@ -15,5 +15,7 @@ if [ ! -f "${TOR_CONFIG}" ]; then
 	exit 1
 fi
 
-nohup ping google.com &>/dev/null & nohup ping google.com &>/dev/null &
-/usr/sbin/privoxy --no-daemon --pidfile "${PIDFILE}" "${CONFFILE}"
+echo "Starting tor script"
+/etc/tor/run.sh
+echo "Starting privoxy script"
+/etc/privoxy/run.sh
