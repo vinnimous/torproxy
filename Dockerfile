@@ -26,6 +26,9 @@ RUN addgroup -S anon \
 && chown -R anon:anon /etc/privoxy/* \
 && chown -R anon:anon /start.sh
 
+# Make executables
+RUN chmod +x /start.sh
+
 # Set `tor` as the default user during the container runtime
 USER anon
 
