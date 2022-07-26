@@ -33,4 +33,4 @@ USER anon
 ENTRYPOINT [ "/bin/sh", "-c" ]
 
 # Starts everything
-CMD ["start.sh"]
+CMD ["sh", "start.sh"]
