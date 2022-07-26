@@ -1,2 +1,2 @@
 #!/bin/sh
-tor -f $1 &
+tor -f $1

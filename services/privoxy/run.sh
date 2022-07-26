@@ -1,2 +1,2 @@
 #!/bin/sh
-privoxy --no-daemon $1&
+privoxy --no-daemon $1
