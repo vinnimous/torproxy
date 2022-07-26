@@ -17,11 +17,11 @@ RUN chown -R tor /etc/tor/*
 # Copy over the privoxy_configurations
 COPY services/privoxy/config /etc/privoxy/config
 COPY services/privoxy/run.sh /etc/privoxy/run.sh
-RUN chown -R /etc/privoxy/*
+RUN chown -R tor /etc/privoxy/*
 
 # Copy over the start up script
 COPY start.sh /
-RUN chown -R start.sh
+RUN chown -R tor start.sh
 
 # Set `tor` as the default user during the container runtime
 USER tor
