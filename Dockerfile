@@ -1,19 +1,34 @@
-# setting alpine as a base for speed and size
+# Set alpine as a base for speed and size
 FROM alpine:latest
 
-# update the package repository and install Tor
-RUN apk update && apk add tor
+LABEL maintainer="vinnimous"
+
+# Update the package repository and install Tor and privoxy
+RUN apk update --no-cache && apk add tor privoxy
+
+# Expose required ports
+EXPOSE 8118 9050
 
 # Copy over the torrc created above and set the owner to `tor`
-COPY torrc /etc/tor/torrc
-RUN chown -R tor /etc/tor
+COPY tor/config /etc/tor/torrc
+COPY tor/run.sh /etc/tor/run.sh
+RUN chown -R tor /etc/tor/*
+
+# Copy over the privoxy_configurations
+COPY privoxy/config /etc/privoxy/config
+COPY privoxy/run.sh /etc/privoxy/run.sh
+RUN chown -R /etc/privoxy/*
+
+# Copy over the start up script
+COPY start.sh /
+RUN chown -R start.sh
 
 # Set `tor` as the default user during the container runtime
 USER tor
 
 # Set `tor` as the entrypoint for the image
-ENTRYPOINT ["tor"]
+# ENTRYPOINT ["tor"]
 
 # Set the default container command
 # This can be overridden later when running a container
-CMD ["-f", "/etc/tor/torrc"]
+CMD ["start.sh"]
