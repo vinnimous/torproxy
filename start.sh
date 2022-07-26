@@ -26,13 +26,13 @@ find_configs()
 start_privoxy()
 {
 	echo "Starting privoxy script"
-	RUN_PRIVOXY
+	${RUN_PRIVOXY}
 }
 
 start_tor()
 {
 	echo "Starting tor script"
-	RUN_TOR
+	${RUN_TOR}
 }
 
 find_configs
