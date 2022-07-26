@@ -1,2 +1,2 @@
 #!/bin/sh
-tor -f /etc/tor/torr &
+tor -f $1 &
