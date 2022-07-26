@@ -15,7 +15,7 @@ if [ ! -f "${TOR_CONFIG}" ]; then
 	exit 1
 fi
 
-echo "Starting tor script"
-/etc/tor/run.sh
 echo "Starting privoxy script"
-/etc/privoxy/run.sh
+/etc/privoxy/run.sh &
+echo "Starting tor script"
+/etc/tor/run.sh &
