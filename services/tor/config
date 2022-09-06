@@ -1,2 +1,2 @@
 SocksPort 0.0.0.0:9050
-Log debug stderr
+Log warn stderr
