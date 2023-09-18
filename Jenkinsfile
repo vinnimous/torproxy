@@ -8,7 +8,7 @@ pipeline {
         dockerImage = ''
     }
     options {
-        buildDiscarder(logRotator(numToKeepStr: '3', artifactNumToKeepStr: '3'))
+        buildDiscarder(logRotator(numToKeepStr: '3'))
     }
     stages {
         stage ("Attempting security stages") {
