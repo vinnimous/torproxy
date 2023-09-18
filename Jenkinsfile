@@ -11,6 +11,10 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '3'))
     }
     stages {
+        stage('Initialize'){
+            def dockerHome = tool 'myDocker'
+            env.PATH = "${dockerHome}/bin:${env.PATH}"
+        }
         stage ("Attempting security stages") {
             steps {
                 shared()
