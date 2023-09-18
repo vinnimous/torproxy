@@ -12,7 +12,7 @@ pipeline {
     }
     stages {
         stage('Initialize'){
-            def dockerHome = tool 'myDocker'
+            def dockerHome = tool 'jenkinsDocker'
             env.PATH = "${dockerHome}/bin:${env.PATH}"
         }
         stage ("Attempting security stages") {
