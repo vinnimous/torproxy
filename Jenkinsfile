@@ -4,7 +4,6 @@ pipeline {
     agent any
     environment {
         dockerHome = tool "jenkinsDocker"
-        env.Path = "${dockerHome}/bin:${env.PATH}"
         registry = "vinnmous/torproxy"
         registryCredential = 'docker_hub_usernamepw'
         dockerImage = ''
@@ -13,6 +12,13 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '3'))
     }
     stages {
+        stage ("Initializing Docker") {
+            steps {
+                script {
+                    env.Path = "${dockerHome}/bin:${env.PATH}"
+                }
+            }
+        }
         stage ("Attempting security stages") {
             steps {
                 shared()
