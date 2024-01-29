@@ -16,19 +16,19 @@ pipeline {
         }
         stage('Building our image') {
             steps {
-                sh "docker build . -v /var/run/docker.sock:/var/run/docker.sock"
+                sh "docker build ."
             }
         }
         stage('Login to Docker') {
             steps {
                 withCredentials([string (credentialsId: 'docker_hub_token', variable: 'token')]) {
-                    sh "docker login --username vinnimous --password ${token} -v /var/run/docker.sock:/var/run/docker.sock"
+                    sh "docker login --username vinnimous --password ${token}"
                 }
             }
         }
         stage('Push to Docker') {
             steps {
-                sh "docker image push vinnimous/torproxy:latest -v /var/run/docker.sock:/var/run/docker.sock"
+                sh "docker image push vinnimous/torproxy:latest"
             }
         }                                                                                                                                                                                                                           
     }
