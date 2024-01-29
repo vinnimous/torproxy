@@ -2,23 +2,10 @@
 
 pipeline {
     agent any
-    environment {
-        dockerHome = tool "jenkinsDocker"
-        registry = "vinnmous/torproxy"
-        registryCredential = 'docker_hub_usernamepw'
-        dockerImage = ''
-    }
     options {
         buildDiscarder(logRotator(numToKeepStr: '3'))
     }
     stages {
-        stage ("Initializing Docker") {
-            steps {
-                script {
-                    env.Path = "${dockerHome}/bin:${env.PATH}"
-                }
-            }
-        }
         stage ("Attempting security stages") {
             steps {
                 shared()
@@ -27,22 +14,24 @@ pipeline {
         stage('Building our image') {
             steps{
                 script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    docker build .
                 }
             }
         }
-        stage('Deploy our image') {
+        stage('Login to Docker') {
             steps{
                 script {
-                    docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push()
-                }
+                    withCredentials([credentialsID: 'docker_hub_token', variable: 'token']) {
+                        docker login --username vinnimous --password ${token}
+                    }
                 }
             }
         }
-        stage('Cleaning up') {
+        stage('Push to Docker') {
             steps{
-                sh "docker rmi $registry:$BUILD_NUMBER"
+                script {
+                    docker image push vinnimous/torproxy:latest
+                }
             }
         }                                                                                                                                                                                                                           
     }
