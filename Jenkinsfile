@@ -12,14 +12,14 @@ pipeline {
             }
         }
         stage('Building our image') {
-            steps{
+            steps {
                 script {
                     docker build .
                 }
             }
         }
         stage('Login to Docker') {
-            steps{
+            steps {
                 script {
                     withCredentials([credentialsID: 'docker_hub_token', variable: 'token']) {
                         docker login --username vinnimous --password ${token}
@@ -28,7 +28,7 @@ pipeline {
             }
         }
         stage('Push to Docker') {
-            steps{
+            steps {
                 script {
                     docker image push vinnimous/torproxy:latest
                 }
