@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Login to Docker') {
             steps {
-                withCredentials([credentialsId: 'docker_hub_token', variable: 'token']) {
+                withCredentials([string (credentialsId: 'docker_hub_token', variable: 'token')]) {
                     sh "docker login --username vinnimous --password ${token}"
                 }
             }
