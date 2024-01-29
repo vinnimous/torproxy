@@ -16,19 +16,19 @@ pipeline {
         }
         stage('Building our image') {
             steps {
-                sh "sudo docker build ."
+                sh "docker build ."
             }
         }
         stage('Login to Docker') {
             steps {
                 withCredentials([string (credentialsId: 'docker_hub_token', variable: 'token')]) {
-                    sh "sudo docker login --username vinnimous --password ${token}"
+                    sh "docker login --username vinnimous --password ${token}"
                 }
             }
         }
         stage('Push to Docker') {
             steps {
-                sh "sudo docker image push vinnimous/torproxy:latest"
+                sh "docker image push vinnimous/torproxy:latest"
             }
         }                                                                                                                                                                                                                           
     }
